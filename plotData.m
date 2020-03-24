@@ -18,10 +18,15 @@ else
             plotType = menu('For Event Aligned Plots: Select One','Overlapped Trials',...
                 'Averaged Traces','Both');
         end
+        if any(analysisOpt==1)
+            incldVel = menu('Include Velocity for Full Sweeps?','Yes','No');
+        end
         for x = 1:nFiles
             load(fullfile(FPpath,FPfiles{x}));
             for y = 1:length(analysisOpt)
                 switch analysisOpt(y)
+                    case 1
+                        plotFullSweeps(data,incldVel);
                     case 2
                         plotMovAlignData(data,plotType);
                     case 3

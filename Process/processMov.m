@@ -44,8 +44,10 @@ for n = 1:nAcq
     if size(wheel,1) == 1
         wheel = wheel';
     end
-    lpFilt = designfilt('lowpassiir','SampleRate',rawFs,'FilterOrder',10,'HalfPowerFrequency',10);
-    wheel = filtfilt(lpFilt,wheel);
+%    lpFilt = designfilt('lowpassiir','SampleRate',rawFs,'FilterOrder',10,'HalfPowerFrequency',10);
+%    wheel = filtfilt(lpFilt,wheel);
+%   Filtering the raw encoder data caused damping effects at high frequency
+%   transitions that affect data processing
     wheel = downsampleTLab(wheel,dsRate,dsType);
     wheel = wheel*circum;
     data.final(n).wheel = wheel;

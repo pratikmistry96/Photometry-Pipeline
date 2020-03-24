@@ -27,7 +27,7 @@ params.FP.basePrc = 10; % Percentile value from 1 - 100 to use when finding base
 params.FP.winSize = 15; % Window size for baselining in seconds
 params.FP.winOv = 0; %Window overlap size in seconds
 params.FP.interpType = 'linear'; % 'linear' 'spline' 
-params.FP.fitType = 'line'; % Fit method 'interp' , 'exp' , 'line'
+params.FP.fitType = 'interp'; % Fit method 'interp' , 'exp' , 'line'
 
 %% Demodulation Parameters
 %When demodulating signals, the filter creates edge artifacts. We record
