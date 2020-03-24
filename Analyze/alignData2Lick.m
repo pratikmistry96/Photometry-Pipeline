@@ -1,6 +1,9 @@
 function data = alignData2Lick(data,tBefore,tAfter)
 if isfield(data,'final')
     Fs = data.gen.Fs;
+    if tBefore > 0
+        tBefore = tBefore*-1;
+    end
     tBefore = tBefore * Fs; tAfter = tAfter * Fs;
     nSamp = length(tBefore:tAfter);
     data.lick.time = [tBefore:tAfter]'/Fs;

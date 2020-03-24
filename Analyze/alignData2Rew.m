@@ -23,6 +23,9 @@ function data = alignData2Rew(data,tBefore,tAfter)
 %
 if isfield(data,'final')
     Fs = data.gen.Fs;
+    if tBefore > 0
+        tBefore = tBefore*-1;
+    end
     tBefore = tBefore * Fs; tAfter = tAfter * Fs;
     nSamp = length(tBefore:tAfter);
     data.rew.time = [tBefore:tAfter]'/Fs;
