@@ -55,6 +55,7 @@ Download the repository and add it to your MATLAB path
 ## Author:
 
 Name: Pratik Mistry
+
 Email: pratik.mistry@nyulangone.org
 
 
