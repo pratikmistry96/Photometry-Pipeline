@@ -2,6 +2,11 @@
 
 This pipeline was developed to process, analyze, and visualize data acquired during fiber photometry experiments. This pipeline includes the following processing / analysis:
 
+* Fiber Photometry
+** Filtering
+** Downsampling
+** Demodulation
+** Deconvolution *In Progress*
 
 
 ## Dependencies:
@@ -22,25 +27,29 @@ Download the repository and add it to your MATLAB path
 
       From the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer into the format required for analysis
 
-      >> convertH5
+       >> convertH5
 
-**Step 2:** Open the processParams file and adjust the parameters accordingly
+2. Edit Parameters
+      
+      Open the processParams file and adjust the parameters accordingly
 
-      >> edit processParams
+       >> edit processParams
 
-Save the file with a new name
+      Save the file with a new name
 
-**Step 3:** Run the processData function
+3. Process Data
 
-      >> processData
+      Select the desired parameter file for the experiment
+
+       >> processData
     
-**Step 4:** Run the analyzeData function
+4. Analyze Data
 
-      >> analyzeData
+       >> analyzeData
 
-**Step 5:** Run the plotData function
+5. Visual Data
 
-      >> plotData
+       >> plotData
 
 ## Author:
 
