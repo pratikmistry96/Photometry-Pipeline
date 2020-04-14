@@ -24,7 +24,7 @@ Download the repository and add it to your MATLAB path
 
       >> edit processParams
 
-Save the file with a new filename
+Save the file with a new name
 
 **Step 3:** Run the processData function
 
@@ -37,4 +37,10 @@ Save the file with a new filename
 **Step 5:** Run the plotData function
 
       >> plotData
+
+## Author:
+
+Name: Pratik Mistry
+Email: pratik.mistry@nyulangone.org
+
 
