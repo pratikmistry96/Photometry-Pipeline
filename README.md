@@ -11,9 +11,11 @@ Please download the toolbox and add it to your path.
 
 ## How to Use:
 
-Step 1: Convert Files
+### Step 1: Convert Files
 
-  -- f
+From the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer into the format required for analysis
+
+    >> convertH5
 
 ### Set Parameters for Pipeline
 
