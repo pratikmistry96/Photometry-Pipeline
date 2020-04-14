@@ -1,6 +1,8 @@
 # Photometry Pipeline
 
-This pipeline was developed to process, analyze, and visualize 
+This pipeline was developed to process, analyze, and visualize data acquired during fiber photometry experiments. This pipeline includes the following processing / analysis:
+
+
 
 ## Dependencies:
 
@@ -16,7 +18,7 @@ Download the repository and add it to your MATLAB path
 
 ## Steps:
 
-**Step 1:** rom the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer into the format required for analysis
+1. ** rom the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer into the format required for analysis
 
       >> convertH5
 
