@@ -10,12 +10,13 @@ if isfield(data,'final')
         nFP = data.final(n).nFPchan;
         time = data.final(n).time;
         FP = data.final(n).FP;
-        vel = data.final(n).vel;
+        end
         for x = 1:nFP
             tmpFP = FP{x}; FPname = allFPnames{x};
             tmpFig = figure; set(tmpFig,'defaultAxesColorOrder',[left_color;right_color]); hold on;
             yyaxis left; plot(time,tmpFP,'-','color',left_color); ylabel(['dF/F','-',FPname]);
             if incldVel == 1
+                vel = data.final(n).vel;
                 yyaxis right; plot(time,vel,'-','color',right_color); ylabel('Velocity cm/s');
             end
             xlabel('Time(s)'); title([expDate,'-',mouseName,sprintf(' Sweep # %d',n)]);
