@@ -3,11 +3,17 @@
 A pipeline to process data acquired during fiber photometry experiments
 Dependencies: Tritsch Lab ToolBox 
 
-## Dependencies
+## Dependencies:
+
+The pipeline was written using MATLAB2018a
 
 The Tritsch Lab Toolbox available at: https://github.com/TritschLab/TLab_Toolbox
 
 Please download the toolbox and add it to your path.
+
+## Installation:
+
+Download the 
 
 ## How to Use:
 
@@ -17,7 +23,9 @@ From the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer int
 
     >> convertH5
 
-### Set Parameters for Pipeline
+### Step 2: Set Parameters
+
+Open the processParams file
 
 
 
