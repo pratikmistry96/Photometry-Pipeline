@@ -3,10 +3,10 @@
 This pipeline was developed to process, analyze, and visualize data acquired during fiber photometry experiments. This pipeline includes the following processing / analysis:
 
 * Fiber Photometry
-** Filtering
-** Downsampling
-** Demodulation
-** Deconvolution *In Progress*
+  * Filtering
+  * Downsampling
+  * Demodulation
+  * Deconvolution *In Progress*
 
 
 ## Dependencies:
