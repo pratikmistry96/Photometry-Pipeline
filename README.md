@@ -1,7 +1,6 @@
 # Photometry Pipeline
 
-A pipeline to process data acquired during fiber photometry experiments
-Dependencies: Tritsch Lab ToolBox 
+This pipeline was developed to process, analyze, and visualize 
 
 ## Dependencies:
 
@@ -13,7 +12,7 @@ Please download the toolbox and add it to your path.
 
 ## Installation:
 
-Download the 
+Download the repository and add it to your MATLAB path
 
 ## How to Use:
 
@@ -25,11 +24,11 @@ From the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer int
 
 ### Step 2: Set Parameters
 
-Open the processParams file
+Open the processParams file and adjust the parameters accordingly
 
+    >> edit processParams
 
-
-Description: This pipeline was created by Pratik Mistry to process, analyze, and visualize Photometry data and any other behavioral data gathered. These analyzes performed in this pipeline require the data structure that is outputted from the "convertH5" function found in the Tritsch Lab ToolBox Repo.
+Save the file with a new filename
 
 
 
