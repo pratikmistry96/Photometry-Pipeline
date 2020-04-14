@@ -12,7 +12,8 @@ Please download the toolbox and add it to your path.
 ## How to Use:
 
 ### 1. Convert h5 files
-    -- Using the **convertH5** function from the TLab Toolbox, please convert h5 data files acquired from wavesurfer into mat files
+
+Using the **convertH5** function from the TLab Toolbox, please convert h5 data files acquired from wavesurfer into mat files
 
 
 
