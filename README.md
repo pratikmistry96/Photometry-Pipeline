@@ -11,7 +11,7 @@ Please download the toolbox and add it to your path.
 
 ## How to Use:
 
-### Step 1: Convert FIles
+Step 1: Convert Files
 
   -- f
 
