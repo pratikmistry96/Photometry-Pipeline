@@ -3,10 +3,11 @@
 This pipeline was developed to process, analyze, and visualize data acquired during fiber photometry experiments. This pipeline includes the following processing / analysis:
 
 * Fiber Photometry
-  * Filtering
-  * Downsampling
-  * Demodulation
-  * Deconvolution *In Progress*
+  * Filtering, Baselining, Demodulation, and Deconvolution *In Progress*
+* Movement
+  * Velocity Calculation, Movement Onset and Offset Alignment
+* Reward
+  * Reward Offset and Lick Onset Alignment
 
 
 ## Dependencies:
