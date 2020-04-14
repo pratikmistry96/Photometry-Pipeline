@@ -10,7 +10,6 @@ if isfield(data,'final')
         nFP = data.final(n).nFPchan;
         time = data.final(n).time;
         FP = data.final(n).FP;
-        end
         for x = 1:nFP
             tmpFP = FP{x}; FPname = allFPnames{x};
             tmpFig = figure; set(tmpFig,'defaultAxesColorOrder',[left_color;right_color]); hold on;
