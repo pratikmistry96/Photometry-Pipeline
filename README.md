@@ -14,37 +14,27 @@ Please download the toolbox and add it to your path.
 
 Download the repository and add it to your MATLAB path
 
-## How to Use:
+## Steps:
 
-**Step 1: Convert Files**
-
-From the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer into the format required for analysis
+**Step 1:** rom the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer into the format required for analysis
 
       >> convertH5
 
-**Step 2: Set Parameters
-
-Open the processParams file and adjust the parameters accordingly
+**Step 2:** Open the processParams file and adjust the parameters accordingly
 
       >> edit processParams
 
 Save the file with a new filename
 
-**Step 3: Process Data
-
-Run the processData function
+**Step 3:** Run the processData function
 
       >> processData
     
-**Step 4: Analyze Data
-
-Run the analyzeData function
+**Step 4:** Run the analyzeData function
 
       >> analyzeData
 
-**Step 5: Visualize Data
-
-Run the plotData function
+**Step 5:** Run the plotData function
 
       >> plotData
 
