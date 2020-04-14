@@ -20,7 +20,7 @@ Download the repository and add it to your MATLAB path
 
 From the TLab Toolbox, run **convertH5** to convert h5 files from wavesurfer into the format required for analysis
 
-** Hello 
+    ** Hello 
 
     >> convertH5
 
