@@ -11,7 +11,7 @@
 %
 %% General Parameters
 params.dsType = 3; % 1 = Bin Summing; 2 = Bin Averaging; 3 = Traditional (NOT RECOMMENDED)
-params.dsRate = 1; % Downsampling rate if you want to downsample the signal
+params.dsRate = 40; % Downsampling rate if you want to downsample the signal
 %This dsRate will also be applied to all signals during the analysis
 %pipeline
 %dsRate = 1 if you do not want to downsample

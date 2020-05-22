@@ -55,6 +55,9 @@ for n = 1:nAcq
     minRest = params.mov.minRestTime * Fs; minRun = params.mov.minRunTime * Fs;
     [onsets,offsets] = getOnsetOffset(abs(vel),velThres,minRest,minRun,finalOnset);
     data.final(n).vel = vel;
+    timeVec = [1:L]/Fs;
+    data.final(n).time = timeVec';
+    %{
     if isfield(data.final(n),'time')
         if isempty(data.final(n).time)
             timeVec = [1:L]/Fs;
@@ -64,6 +67,7 @@ for n = 1:nAcq
         timeVec = [1:L]/Fs;
         data.final(n).time = timeVec';
     end
+    %}
     data.final(n).mov.onsets = onsets;
     data.final(n).mov.offsets = offsets;
 end

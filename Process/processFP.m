@@ -55,13 +55,6 @@ for n = 1:nAcq
         data.final(n).nbFP{x} = nbFP;
         data.final(n).FPbaseline{x} = baseline;
     end
-    if isfield(data.final(n),'time')
-        if isempty(data.final(n).time)
-            timeVec = [1:L]/Fs;
-            data.final(n).time = timeVec';
-        end
-    else
-        timeVec = [1:L]/Fs;
-        data.final(n).time = timeVec';
-    end
+    timeVec = [1:L]/Fs;
+    data.final(n).time = timeVec';
 end
