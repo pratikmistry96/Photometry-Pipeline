@@ -55,8 +55,8 @@ for x = 1:nAcq
         modFreq = inputdlg({['Enter Isosbestic Mod Freq for: ',FPnames{y}],['Enter Excitation Mod Freq for: ',FPnames{y}]});
         isoFreq = str2double(modFreq{1}); excFreq = str2double(modFreq{2});
         isoRef = findRef(isoFreq,refSig,rawFs); excRef = findRef(excFreq,refSig,rawFs);
-        isoDemod = digitalLIA(rawFP,isoRef,rawFs,lpCut,filtOrder);
-        excDemod = digitalLIA(rawFP,excRef,rawFs,lpCut,filtOrder);
+        isoDemod = digitalLIA(rawFP,isoRef,isoFreq,rawFs,lpCut,filtOrder);
+        excDemod = digitalLIA(rawFP,excRef,excFreq,rawFs,lpCut,filtOrder);
         if sigEdge ~= 0
             isoDemod = isoDemod((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
             excDemod = excDemod((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
