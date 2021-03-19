@@ -58,7 +58,7 @@ for x = 1:nAcq
         modFreq = inputdlg(['Enter Modulation Frequency for: ',FPnames{y}]); %Ask for modulation frequency
         modFreq = str2double(modFreq{1}); %Convert string input to a double
         ref = findRef(modFreq,refSig,rawFs); %Find the reference signal from the refsig array using modulation frequency
-        demod = digitalLIA(rawFP,ref,rawFs,lpCut,filtOrder); %Peform the demodulation
+        demod = digitalLIA(rawFP,ref,modFreq,rawFs,lpCut,filtOrder); %Peform the demodulation
         if sigEdge ~= 0 %Remove the beginning and the edge if the setting isn't 0
             demod = demod((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
         end
