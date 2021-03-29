@@ -28,11 +28,17 @@ for n = 1:nAcq
     L = size(data.acq(n).time,1);
     L = length(1:dsRate:L);
     lick = data.acq(n).lick.trace;
+    rewDelivery = data.acq(n).rew.trace;
+    
+    if sigEdge ~= 0 %Remove the beginning and the edge if the setting isn't 0
+        lick = lick((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
+        rewDelivery = rewDelivery((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
+    end
+    
     lick = lick(1:dsRate:end);
+    rewDelivery = rewDelivery(1:dsRate:end);
     data.final(n).lick.trace = lick;
     [data.final(n).lick.onset,~] = getPulseOnsetOffset(lick,0.5);
-    rewDelivery = data.acq(n).rew.trace;
-    rewDelivery = rewDelivery(1:dsRate:end);
     data.final(n).rew.trace = rewDelivery;
     [~,data.final(n).rew.offset] = getPulseOnsetOffset(rewDelivery,0.5);
     timeVec = [1:L]/Fs;

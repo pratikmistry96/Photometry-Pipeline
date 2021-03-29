@@ -28,6 +28,11 @@ for n = 1:length(data.acq)
     %extract pulse onset and offset times from original signal 
     optoFs = data.acq(n).Fs;
     signal = data.acq(n).opto{1};
+    
+    if sigEdge ~= 0
+        signal = signal((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
+    end
+    
     [pulseOnset, pulseOffset] = getPulseOnsetOffset (signal, thres);
     
     %downsample signal to match Fs of other signals (e.g. FP, beh)

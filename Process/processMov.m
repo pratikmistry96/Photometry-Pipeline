@@ -37,7 +37,6 @@ for n = 1:nAcq
     L = length(1:dsRate:L);
     wheel = data.acq(n).wheel;
     if sigEdge ~= 0
-        wheel = data.acq(n).wheel;
         wheel = wheel((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
     end
     wheel = unwrapBeh(wheel);
