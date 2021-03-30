@@ -33,8 +33,6 @@ data.gen.Fs = Fs;
 %The following for-loop will run the behavior analysis on each sweep in the
 %acquisition
 for n = 1:nAcq
-    L = size(data.acq(n).time,1);
-    L = length(1:dsRate:L);
     wheel = data.acq(n).wheel;
     if sigEdge ~= 0
         wheel = wheel((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
@@ -54,6 +52,7 @@ for n = 1:nAcq
     minRest = params.mov.minRestTime * Fs; minRun = params.mov.minRunTime * Fs;
     [onsets,offsets] = getOnsetOffset(abs(vel),velThres,minRest,minRun,finalOnset);
     data.final(n).vel = vel;
+    L = length(wheel); L = length(1:dsRate:L); 
     timeVec = [1:L]/Fs;
     data.final(n).time = timeVec';
     %{
