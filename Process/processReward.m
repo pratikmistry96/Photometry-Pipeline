@@ -25,34 +25,22 @@ rawFs = data.gen.acqFs;
 Fs = rawFs/dsRate;
 data.gen.Fs = Fs;
 for n = 1:nAcq
-    L = size(data.acq(n).time,1);
-    L = length(1:dsRate:L);
-    lick = data.acq(n).lick.trace;
-    rewDelivery = data.acq(n).rew.trace;
-    
-    if sigEdge ~= 0 %Remove the beginning and the edge if the setting isn't 0
+lick = data.acq(n).lick.trace; % Extract raw lick trace from data structure for processing
+    rewDelivery = data.acq(n).rew.trace; % Extract raw cue/reward trace from data structure for processing
+    if sigEdge ~= 0 % Remove the beginning and the edge if the setting isn't 0
         lick = lick((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
         rewDelivery = rewDelivery((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
     end
-    
-    lick = lick(1:dsRate:end);
-    rewDelivery = rewDelivery(1:dsRate:end);
-    data.final(n).lick.trace = lick;
-    [data.final(n).lick.onset,~] = getPulseOnsetOffset(lick,0.5);
-    data.final(n).rew.trace = rewDelivery;
-    [~,data.final(n).rew.offset] = getPulseOnsetOffset(rewDelivery,0.5);
-    timeVec = [1:L]/Fs;
-    data.final(n).time = timeVec';
-    %{
-    if isfield(data.final(n),'time')
-        if isempty(data.final(n).time)
-            timeVec = [1:L]/Fs;
-            data.final(n).time = timeVec';
-        end
-    else
-        timeVec = [1:L]/Fs;
-        data.final(n).time = timeVec';
-    end
-    %}
+    data.final(n).lick.trace = lick(1:dsRate:end); % Downsample lick trace to match Fs of photometry signal
+    data.final(n).lick.onset = getPulseOnsetOffset(lick, 0.5)/dsRate; % Extract lick onset times from raw lick signal/dsRate
+    data.final(n).rew.trace = rewDelivery(1:dsRate:end); % Downsample reward trace to match Fs of photometry signal
+    [onset, offset] = getPulseOnsetOffset(rewDelivery, 0.5); % Extract cue and reward onset times from raw signal
+    onset = onset/dsRate; offset = offset/dsRate; % Adjust trace rise and falls for Fs
+    data.final(n).rew.cue = onset( offset-onset > mean(offset-onset) ); % Long pulses are cue signal
+    data.final(n).rew.delivery = onset( offset-onset < mean(offset-onset) ); % Short pulses are reward delivery signal
+    L = length(lick);
+    L = length(1:dsRate:L); % Length of signal, after removing sigEdge
+    timeVec = [1:L]/Fs; % Generate time vector using length of signal, Fs of downsampled signal
+    data.final(n).time = timeVec'; % Load time vector into data structure
 end
 end
