@@ -20,8 +20,8 @@ thres = params.opto.threshold;      %threshold for pulse onset/offset
 cutoff = params.opto.cutoff;        %filter cutoff freq
 order = params.opto.order;          %filter order
 filtType = params.opto.filtType;    %filter type
-dsRate = params.opto.dsRate;        %downsampling rate
-dsType = params.opto.dsType;
+dsRate = params.dsRate;             %downsampling rate
+dsType = params.dsType;
 
 for n = 1:length(data.acq)
     data.final(n).opto = struct; %initialize structure
@@ -51,8 +51,8 @@ for n = 1:length(data.acq)
     %    end
     %end
 
-    data.final(n).opto.on  = pulseOnset; %pulse onset in samples, matching original optoFs
-    data.final(n).opto.off = pulseOffset;
+    data.final(n).opto.on  = pulseOnset/dsRate; %pulse onset in samples, matching data.gen.Fs
+    data.final(n).opto.off = pulseOffset/dsRate;
     data.final(n).opto.Fs = optoFs;
     data.final(n).opto.params = params.opto;
     data.final(n).opto.vec = optoNew; %downsampled (and filtered) vector 
