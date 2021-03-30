@@ -24,6 +24,7 @@ dsRate = params.dsRate;
 rawFs = data.gen.acqFs;
 Fs = rawFs/dsRate;
 data.gen.Fs = Fs;
+sigEdge = params.FP.sigEdge;
 for n = 1:nAcq
 lick = data.acq(n).lick.trace; % Extract raw lick trace from data structure for processing
     rewDelivery = data.acq(n).rew.trace; % Extract raw cue/reward trace from data structure for processing
