@@ -17,7 +17,7 @@ else
         nFiles = length(FPfiles);
         [analysisOpt,ind] = listdlg('PromptString',{'Select All Analyzes to Perform',...
             'For Multiple Methods: Hold Ctrl and Select'},'ListString',{'Photometry',...
-            'Velocity','Onset/Offset','Cross-Correlations','Optogenetics','Reward Delivery'});
+            'Velocity','Onset/Offset','Cross-Correlations','Optogenetics','Reward Delivery','Camera Trigger'});
         if ind == 0
             msgbox('Analysis Aborted');
         else
@@ -95,6 +95,14 @@ else
                                 fprintf('Finished Processing Reward Delivery!\n\n');
                             catch
                                 fprintf('Error Processing Reward Delivery for file\n\n');
+                            end
+                        case 7
+                            try
+                                fprintf('Processing Camera Trigger....\n');
+                                data = processCamera(data,params);
+                                fprintf('Finished Processing Camera Trigger!\n\n');
+                            catch
+                                fprintf('Error Processing Camera Trigger for file\n\n');
                             end
                     end
                 end
