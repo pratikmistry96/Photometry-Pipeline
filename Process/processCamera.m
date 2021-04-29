@@ -23,7 +23,7 @@ function [data] = processCamera (data, params)
 %%
     for n = 1:length(data.acq)
         data.final(n).cam = struct; % Initialize structure
-        signal = data.acq(n).cam{1}; % Extract signal from data structure
+        signal = data.acq(n).cam; % Extract signal from data structure
         if sigEdge ~= 0
             signal = signal((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
         end
