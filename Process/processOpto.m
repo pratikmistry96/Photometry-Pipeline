@@ -28,7 +28,7 @@ dsType = params.dsType;
 %% Process opto signal
 for n = 1:length(data.acq)
     data.final(n).opto = struct; % Initialize structure
-    signal = data.acq(n).opto{1}; % Extract signal from data structure
+    signal = data.acq(n).opto; % Extract signal from data structure
     
     if sigEdge ~= 0 % Remove signal from beginning and end
         signal = signal((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
