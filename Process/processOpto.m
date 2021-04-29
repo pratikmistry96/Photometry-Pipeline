@@ -4,6 +4,7 @@ function [data] = processOpto (data, params)
 %Description: T-Lab specific code for processing optogenetic stimulation
 %signal into general T-Lab data structure
 %Updated On: 31 October 2019 - added new filter+downsampling
+%Updated On: 29 April 2021 - added sigEdge
 %
 % [data] = processOpto (data, params)
 %
@@ -15,32 +16,29 @@ function [data] = processOpto (data, params)
 %   'data'  - data structure containing new data.opto sub-structure
 %
 
-%pull variables from params:
-thres = params.opto.threshold;      %threshold for pulse onset/offset
-cutoff = params.opto.cutoff;        %filter cutoff freq
-order = params.opto.order;          %filter order
-filtType = params.opto.filtType;    %filter type
-dsRate = params.dsRate;             %downsampling rate
+%% Parameters, extracted from params
+thres = params.opto.threshold;      % threshold for pulse onset/offset
+cutoff = params.opto.cutoff;        % filter cutoff freq
+order = params.opto.order;          % filter order
+filtType = params.opto.filtType;    % filter type
+rawFs = params.acqFs;               % acquistion sampling rate
+dsRate = params.dsRate;             % downsampling rate
 dsType = params.dsType;
 
+%% Process opto signal
 for n = 1:length(data.acq)
-    data.final(n).opto = struct; %initialize structure
-    %extract pulse onset and offset times from original signal 
-    optoFs = data.acq(n).Fs;
-    signal = data.acq(n).opto{1};
+    data.final(n).opto = struct; % Initialize structure
+    signal = data.acq(n).opto{1}; % Extract signal from data structure
     
-    if sigEdge ~= 0
+    if sigEdge ~= 0 % Remove signal from beginning and end
         signal = signal((sigEdge*rawFs)+1:end-(sigEdge*rawFs));
     end
     
-    [pulseOnset, pulseOffset] = getPulseOnsetOffset (signal, thres);
+    [pulseOnset, pulseOffset] = getPulseOnsetOffset (signal, thres); % Onset and offset times for opto pulses
     
-    %downsample signal to match Fs of other signals (e.g. FP, beh)
-    [optoNew,~] = filterFP(signal,optoFs,cutoff,order,filtType);
-    optoFsNew = optoFs/dsRate;
-    optoNew = downsample_TLab(optoNew,dsRate,dsType);
+    optoNew = filterFP(signal,rawFs,cutoff,order,filtType); % Filter before downsampling
+    optoNew = downsample_TLab(optoNew,dsRate,dsType); % Downsample signal to match data.gen.Fs
     
-
     %vestigial code to extract only first and last stimuli of pulse train
     %if isfield(params.opto,'stimtype')
     %    switch params.opto.stimtype
@@ -51,13 +49,9 @@ for n = 1:length(data.acq)
     %    end
     %end
 
-    data.final(n).opto.on  = pulseOnset/dsRate; %pulse onset in samples, matching data.gen.Fs
-    data.final(n).opto.off = pulseOffset/dsRate;
-    data.final(n).opto.Fs = optoFs;
-    data.final(n).opto.params = params.opto;
-    data.final(n).opto.vec = optoNew; %downsampled (and filtered) vector 
-    data.final(n).opto.vecFs = optoFsNew; %Fs of downsampled/filtered vector
+    data.final(n).opto.on  = pulseOnset/dsRate;  % Pulse onset in samples, matching data.gen.Fs
+    data.final(n).opto.off = pulseOffset/dsRate; % Pulse offset in samples, matching data.gen.Fs
+    data.final(n).opto.trace = optoNew;          % Downsampled pulse vector 
 end      
 
-%data.opto = opto; %add to data structure
 end
