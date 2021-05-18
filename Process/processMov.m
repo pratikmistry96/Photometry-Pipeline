@@ -1,7 +1,7 @@
 function data = processMov(data,params)
 %Process Behavior
 %
-%   [data] = processBeh(data,params)
+%   [data] = processMov(data,params)
 %
 %   Description: This function is designed to convert rotary encoder information into velocity
 %   traces and quickly find onsets. The parameters for the analysis are found in the params
@@ -49,10 +49,8 @@ for n = 1:nAcq
     wheel = wheel*circum;
     data.final(n).wheel = wheel;
     vel = getVel(wheel,Fs,winSize);
-    minRest = params.mov.minRestTime * Fs; minRun = params.mov.minRunTime * Fs;
-    [onsets,offsets] = getOnsetOffset(abs(vel),velThres,minRest,minRun,finalOnset);
-    data.final(n).vel = vel;
-    L = length(wheel); L = length(1:dsRate:L); 
+        data.final(n).vel = vel;
+    L = length(wheel);
     timeVec = [1:L]/Fs;
     data.final(n).time = timeVec';
     %{
@@ -66,6 +64,10 @@ for n = 1:nAcq
         data.final(n).time = timeVec';
     end
     %}
-    data.final(n).mov.onsets = onsets;
-    data.final(n).mov.offsets = offsets;
+    try
+        minRest = params.mov.minRestTime * Fs; minRun = params.mov.minRunTime * Fs;
+        [onsets,offsets] = getOnsetOffset(abs(vel),velThres,minRest,minRun,finalOnset);
+        data.final(n).mov.onsets = onsets;
+        data.final(n).mov.offsets = offsets;
+    end
 end
