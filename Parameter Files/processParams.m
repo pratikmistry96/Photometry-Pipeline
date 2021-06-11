@@ -59,16 +59,20 @@ params.mov.velThres_rest = 2;
 params.mov.timeThres_rest = 4;
 params.mov.timeShift_rest = 0.5;
 
+%% Reward Analysis
+params.rew.timeBefore = 2; %Time to display preceding reward delivery
+params.rew.timeAfter = 2; %Time to display following reward delivery
+
 %% Peak Analysis -- NOT USED CURRENTLY
-params.peaks.minHeight = 0.4;
-params.peaks.minProminence = 0.4;
-params.peaks.smoothWin = 2;
+% params.peaks.minHeight = 0.4;
+% params.peaks.minProminence = 0.4;
+% params.peaks.smoothWin = 2;
 %params.troughs.minHeight = 0.4;
 %params.troughs.minProminence = 0.4;
 
 %% Cross-Correlations
-params.cc.lag = 10; %In seconds how much to shift forward and backwards
-params.cc.type = 1; % 1 = Cross-Correlation 2 - Cross-Covariance
+% params.cc.lag = 10; %In seconds how much to shift forward and backwards
+% params.cc.type = 1; % 1 = Cross-Correlation 2 - Cross-Covariance
 
 %% Opto-Pulse Analysis
 %   'threshold' - a.u. or V, depends on voltage output of pulse generator
