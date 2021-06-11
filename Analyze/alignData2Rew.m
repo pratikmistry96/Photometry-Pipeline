@@ -20,6 +20,8 @@ function data = alignData2Rew(data,tBefore,tAfter)
 %       data - Adjusted data structure with new data
 %
 %   Author: Pratik Mistry, 2020
+%   Updated: Anya Krok, June 2021. Code now works for output from
+%   processReward and accounts for multi-sweep recordings.
 %
 if isfield(data,'final')
     Fs = data.gen.Fs;
@@ -34,33 +36,33 @@ if isfield(data,'final')
         for n = 1:nSweeps
             tmpVel = data.final(n).vel;
             totSamp = length(tmpVel);
-            rewTime = data.final(n).rew.offset;
-            rewTime = adjEvtTimes(rewTime,tBefore,tAfter,totSamp);
-            data.rew.rewOffset(n) = rewTime;
-            data.rew.vel(:,n) = alignTrace2Event(tmpVel,rewTime,tBefore,tAfter,nSamp);
+            rewTime = data.final(n).rew.delivery;
+            % rewTime = adjEvtTimes(rewTime,tBefore,tAfter,totSamp);
+            data.rew.events{n} = rewTime; % Save event times signal is aligned to into new rew structure
+            data.rew.vel{n} = alignTrace2Event(tmpVel,rewTime,tBefore,tAfter,nSamp); % Velocity signal aligned to reward delivery event times
             nFP = data.final(n).nFPchan;
             for m = 1:nFP
                 tmpFP = data.final(n).FP{m};
-                data.rew.FP{m}(:,n) = alignTrace2Event(tmpFP,rewTime,tBefore,tAfter,nSamp);
+                data.rew.FP{m,n} = alignTrace2Event(tmpFP,rewTime,tBefore,tAfter,nSamp);
             end
-            if isfield(data.final,'lick')
-                lickOnset = data.final(n).lick.onset;
-                if ~isempty(lickOnset)
-                    lickLogVec = lickOnset > (rewTime + tBefore) & lickOnset < (rewTime + tAfter);
-                    lickOnset = lickOnset(lickLogVec);
-                    data.rew.lickOnset{n} = lickOnset;
-                else
-                    data.rew.lickOnset{n} = [];
-                end
-            end
+%             if isfield(data.final,'lick')
+%                 lickOnset = data.final(n).lick.onset;
+%                 if ~isempty(lickOnset)
+%                     lickLogVec = lickOnset > (rewTime + tBefore) & lickOnset < (rewTime + tAfter);
+%                     lickOnset = lickOnset(lickLogVec);
+%                     data.rew.lickRew{n} = lickOnset;
+%                 else
+%                     data.rew.lickRew{n} = [];
+%                 end
+%             end
         end
         FPcell = data.rew.FP;
         nFP = length(FPcell);
-        for x = 1:nFP
-            tmpFP = FPcell{x};
-            data.rew.avgFP{x} = mean(tmpFP,2);
+        for m = 1:nFP
+            tmpFP = FPcell{m,n};
+            data.rew.avgFP{m,n} = mean(tmpFP,2);
         end
-        data.rew.avgVel = mean(data.rew.vel,2);
+        data.rew.avgVel{n} = mean(data.rew.vel{n},2);
     else
         fprintf('No Analyzed Reward Data Found');
     end
