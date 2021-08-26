@@ -107,7 +107,11 @@ else
                     end
                 end
                 data.gen = data.gen;
-                save(fullfile(FPpath,FPfiles{x}),'data');
+                try
+                    save(fullfile(FPpath,FPfiles{x}),'data');
+                catch
+                    save(fullfile(FPpath,FPfiles{x}),'data','-v7.3');
+                end
             end
             clear all
         end
