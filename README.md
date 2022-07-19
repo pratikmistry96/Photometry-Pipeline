@@ -44,13 +44,6 @@ Download the repository and add it to your MATLAB path
 
        >> processData
     
-4. Analyze Data
-
-       >> analyzeData
-
-5. Visual Data
-
-       >> plotData
 
 ## Author:
 
